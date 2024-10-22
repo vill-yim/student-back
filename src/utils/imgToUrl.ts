@@ -19,15 +19,6 @@ export const imgToUrl = async (img: any) => {
     const r = await res.json();
     return r['data']['url'];
   } catch (error) {
-    throw new HttpException(
-      {
-        status: HttpStatus.NOT_MODIFIED,
-        error: error,
-      },
-      HttpStatus.FORBIDDEN,
-      {
-        cause: error,
-      },
-    );
+    return 'No convertible!';
   }
 };

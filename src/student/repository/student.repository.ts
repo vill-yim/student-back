@@ -21,20 +21,27 @@ export class StudentRepository {
   ) {}
 
   async createStudent(createStudent: CreateStudentDto) {
-    const req: CreateStudentDto =
-      await this.studentRepository.save(createStudent);
-    const Student: StudentRes = {
-      student_id: req.student_id,
-      name: req.name,
-      lastname: req.lastname,
-      type_identify: req.type_identify,
-      number_identify: req.number_identify,
-      profile_img: req.profile_img,
-      approved: req.approved,
-      active: req.active,
-    };
+    try {
+      const req: CreateStudentDto =
+        await this.studentRepository.save(createStudent);
 
-    return { token: Student, status: HttpStatus.CREATED };
+      const StudentCreate: StudentRes = {
+        student_id: req.student_id,
+        name: req.name,
+        lastname: req.lastname,
+        type_identify: req.type_identify,
+        number_identify: req.number_identify,
+        profile_img: req.profile_img,
+        approved: req.approved,
+        active: req.active,
+      };
+
+      if (!req) return { status: HttpStatus.NOT_FOUND };
+
+      return { token: StudentCreate, status: HttpStatus.ACCEPTED };
+    } catch (error) {
+      return error;
+    }
   }
 
   async login(login: LoginStudent) {

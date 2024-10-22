@@ -37,7 +37,8 @@ export class StudentController {
         password: password,
       };
 
-      return await this.studentService.createStudent(Student);
+      const res = await this.studentService.createStudent(Student);
+      return res;
     } catch (error) {
       return { error: `${error}`, status: HttpStatus.INTERNAL_SERVER_ERROR };
     }
@@ -51,7 +52,8 @@ export class StudentController {
       password: loginStudent.password,
     };
 
-    return this.studentService.login(login);
+    const res = await this.studentService.login(login);
+    return res;
   }
 
   @Get('students')

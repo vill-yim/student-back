@@ -5,7 +5,7 @@ export class CreateStudentDto {
   type_identify: string;
   number_identify: string;
   password: string;
-  profile_img: string;
+  profile_img?: string;
   approved?: boolean;
   active?: boolean;
 }

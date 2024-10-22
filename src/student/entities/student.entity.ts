@@ -30,14 +30,14 @@ export class Student {
   @Length(6, 100)
   password: string;
 
-  @Column({ nullable: true, default: '' })
+  @Column({ nullable: true })
   @IsOptional()
   profile_img: string;
 
   @Column({ default: false })
   approved: boolean;
 
-  @Column({ default: false })
+  @Column({ default: true })
   active: boolean;
 
   @ManyToMany(() => Signature, (signa) => signa.signature_id)

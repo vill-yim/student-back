@@ -3,6 +3,7 @@ import { CreateStudentDto } from '../dto/create-student.dto';
 import { StudentRepository } from '../repository/student.repository';
 import { JwtService } from '@nestjs/jwt';
 import { LoginStudent } from '../dto/loginStudent.dto';
+import { StudentRes } from '../dto/resStudent.dto';
 
 @Injectable()
 export class StudentService {
@@ -13,9 +14,14 @@ export class StudentService {
 
   async createStudent(createStudentDto: CreateStudentDto) {
     const req = await this.studentRepository.createStudent(createStudentDto);
-    if (req.status !== HttpStatus.CREATED) return { error: req };
 
-    return this.jwtService.signAsync(req);
+    if (req.status !== HttpStatus.ACCEPTED)
+      return { error: 'Hubo un problema al crear usuario!' };
+
+    return {
+      token: await this.jwtService.signAsync(req),
+      status: HttpStatus.ACCEPTED,
+    };
   }
 
   async login(login: LoginStudent) {
@@ -23,12 +29,15 @@ export class StudentService {
 
     if (req.status !== HttpStatus.ACCEPTED) {
       if (req.status === HttpStatus.INTERNAL_SERVER_ERROR)
-        return { error: 'Contraseña incorrecta!' };
+        return { error: 'Contraseña incorrecta!', status: req.status };
       if (req.status === HttpStatus.NOT_FOUND)
-        return { error: 'Estudiante no existe!' };
+        return { error: 'Estudiante no existe!', status: req.status };
     }
 
-    return this.jwtService.signAsync(req);
+    return {
+      token: await this.jwtService.signAsync(req),
+      status: HttpStatus.ACCEPTED,
+    };
   }
 
   async studentsAll() {
