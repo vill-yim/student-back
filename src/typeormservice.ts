@@ -29,17 +29,6 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
     }
      */
 
-    const dbUrl = this.configService.get<string>('DATABASE_URL');
-
-    if (dbUrl) {
-      return {
-        type: 'postgres',
-        url: dbUrl,
-        entities: [Student, Signature, Task, Grade],
-        synchronize: true,
-      };
-    }
-
     return {
       type: this.configService.get<any>('DB_TYPE'),
       name: this.configService.get<string>('DB_NAME'),
