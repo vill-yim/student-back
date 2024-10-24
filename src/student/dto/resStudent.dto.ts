@@ -5,6 +5,7 @@ export class StudentRes {
   type_identify: string;
   number_identify: string;
   profile_img: string;
+  email?: string;
   approved: boolean;
   active: boolean;
 }

@@ -32,6 +32,7 @@ export class StudentRepository {
         type_identify: req.type_identify,
         number_identify: req.number_identify,
         profile_img: req.profile_img,
+        email: req.email,
         approved: req.approved,
         active: req.active,
       };
@@ -58,6 +59,7 @@ export class StudentRepository {
         lastname: req.lastname,
         type_identify: req.type_identify,
         number_identify: req.number_identify,
+        email: req.email,
         profile_img: req.profile_img,
         approved: req.approved,
         active: req.active,
@@ -69,8 +71,19 @@ export class StudentRepository {
     }
   }
 
+  async allDataStudent(student_id: string) {
+    const student = await this.studentRepository
+      .createQueryBuilder('student')
+      .leftJoinAndSelect('student.grades', 'grade')
+      .leftJoinAndSelect('grade.task', 'task')
+      .leftJoinAndSelect('task.signature', 'signature')
+      .where('student.student_id = :student_id', { student_id })
+      .getOne();
+
+    return student;
+  }
+
   async studentsAll() {
     return this.studentRepository.find();
   }
-  async studentProfile() {}
 }

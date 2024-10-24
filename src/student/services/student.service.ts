@@ -3,7 +3,6 @@ import { CreateStudentDto } from '../dto/create-student.dto';
 import { StudentRepository } from '../repository/student.repository';
 import { JwtService } from '@nestjs/jwt';
 import { LoginStudent } from '../dto/loginStudent.dto';
-import { StudentRes } from '../dto/resStudent.dto';
 
 @Injectable()
 export class StudentService {
@@ -40,8 +39,11 @@ export class StudentService {
     };
   }
 
+  async allDataStudent(student_id: string) {
+    return await this.studentRepository.allDataStudent(student_id);
+  }
+
   async studentsAll() {
     return this.studentRepository.studentsAll();
   }
-  async studentProfile() {}
 }

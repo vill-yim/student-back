@@ -6,6 +6,7 @@ import {
   UploadedFile,
   HttpStatus,
   Get,
+  Param,
 } from '@nestjs/common';
 import { imgToUrl } from 'src/utils/imgToUrl';
 import { StudentService } from '../services/student.service';
@@ -13,6 +14,7 @@ import { CreateStudentDto } from '../dto/create-student.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { hashPassword } from 'src/utils/hashpassword';
 import { LoginStudent } from '../dto/loginStudent.dto';
+import { UUID } from 'crypto';
 
 @Controller('student')
 export class StudentController {
@@ -26,13 +28,14 @@ export class StudentController {
   ) {
     try {
       const req = Object.assign({}, createStudentDto);
-      const profile = await imgToUrl(profile_img);
+      const profile: any = await imgToUrl(profile_img);
       const password = await hashPassword(req.password);
       const Student: CreateStudentDto = {
         name: req.name,
         lastname: req.lastname,
         type_identify: req.type_identify,
         number_identify: req.number_identify,
+        email: req.email,
         profile_img: profile,
         password: password,
       };
@@ -54,6 +57,11 @@ export class StudentController {
 
     const res = await this.studentService.login(login);
     return res;
+  }
+
+  @Get(`profile/:id`)
+  async alldataStudent(@Param('id') id: UUID) {
+    return await this.studentService.allDataStudent(id.toString());
   }
 
   @Get('students')

@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Grade } from './grade.entity';
 import { IsNotEmpty, Length, IsOptional } from 'class-validator';
 import { Signature } from './signature.entity';
 
@@ -34,12 +41,18 @@ export class Student {
   @IsOptional()
   profile_img: string;
 
+  @Column({ unique: true, nullable: true })
+  email: string;
+
   @Column({ default: false })
   approved: boolean;
 
   @Column({ default: true })
   active: boolean;
 
-  @ManyToMany(() => Signature, (signa) => signa.signature_id)
-  final_grade: Signature[];
+  @OneToMany(() => Grade, (grade) => grade.student)
+  grades: Grade[];
+
+  @ManyToMany(() => Signature, (signature) => signature.students)
+  signatures: Signature[];
 }
