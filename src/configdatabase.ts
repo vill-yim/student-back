@@ -5,7 +5,7 @@ import { TypeOrmService } from './typeormservice';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      useClass: TypeOrmService | procees.env,
+      useClass: TypeOrmService,
     }),
   ],
 })
