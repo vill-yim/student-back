@@ -39,7 +39,7 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
      */
 
     return {
-      type: this.configService.get<any>('DB_TYPE'),
+      type: 'postgres',
       name: this.configService.get<string>('DB_NAME'),
       host: this.configService.get<string>('DB_HOST_LOCAL'),
       port: this.configService.get<number>('DB_PORT'),
