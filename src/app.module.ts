@@ -6,7 +6,7 @@ import { StudentModule } from './student/student.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env.development.local',
+      envFilePath: '.env',
       isGlobal: true,
     }),
     ConfigDatabase,
