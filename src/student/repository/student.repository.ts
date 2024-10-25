@@ -8,6 +8,7 @@ import { Task } from '../entities/task.entity';
 import { Signature } from '../entities/signature.entity';
 import { compare } from 'bcrypt';
 import { StudentRes } from '../dto/resStudent.dto';
+import { Grade } from '../entities/grade.entity';
 
 @Injectable()
 export class StudentRepository {
@@ -18,6 +19,8 @@ export class StudentRepository {
     private readonly signatureRepository: Repository<Signature>,
     @InjectRepository(Task)
     private readonly taskRepository: Repository<Task>,
+    @InjectRepository(Grade)
+    private readonly gradeRepository: Repository<Grade>,
   ) {}
 
   async createStudent(createStudent: CreateStudentDto) {
@@ -71,6 +74,10 @@ export class StudentRepository {
     }
   }
 
+  async studentsAll() {
+    return this.studentRepository.find();
+  }
+
   async allDataStudent(student_id: string) {
     const student = await this.studentRepository
       .createQueryBuilder('student')
@@ -79,11 +86,6 @@ export class StudentRepository {
       .leftJoinAndSelect('task.signature', 'signature')
       .where('student.student_id = :student_id', { student_id })
       .getOne();
-
     return student;
-  }
-
-  async studentsAll() {
-    return this.studentRepository.find();
   }
 }

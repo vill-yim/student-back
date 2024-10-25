@@ -5,6 +5,7 @@ import { Student } from './student/entities/student.entity';
 import { Task } from './student/entities/task.entity';
 import { Signature } from './student/entities/signature.entity';
 import { Grade } from './student/entities/grade.entity';
+import { Feedback } from './student/entities/feedback.entity';
 
 @Injectable()
 export class TypeOrmService implements TypeOrmOptionsFactory {
@@ -28,15 +29,7 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
       };
     }
 
-    const dbUrl = this.configService.get<string>('DATABASE_URL');
-    return {
-      type: 'postgres',
-      url: dbUrl,
-      entities: [Student, Signature, Task, Grade],
-      synchronize: true,
-    };
-    
-     */
+    const dbUrl = 
 
     return {
       type: 'postgres',
@@ -46,6 +39,17 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
       username: this.configService.get<string>('DB_USERNAME'),
       password: this.configService.get<string>('DB_PASSWORD'),
       database: this.configService.get<string>('DB_SELETED'),
+      entities: [Student, Signature, Task, Grade, Feedback],
+      synchronize: true,
+    };
+
+   
+    
+     */
+
+    return {
+      type: 'postgres',
+      url: this.configService.get<string>('DATABASE_URL'),
       entities: [Student, Signature, Task, Grade],
       synchronize: true,
     };

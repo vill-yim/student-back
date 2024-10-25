@@ -12,6 +12,7 @@ import { Grade } from './grade.entity';
 export class Task {
   @PrimaryGeneratedColumn('uuid')
   task_id: string;
+
   @Column()
   task_name: string;
 
@@ -21,7 +22,7 @@ export class Task {
   @Column({ default: false })
   expired: boolean;
 
-  @ManyToOne(() => Signature, (signs) => signs.tasks)
+  @ManyToOne(() => Signature, (signature) => signature.tasks)
   signature: Signature;
 
   @OneToMany(() => Grade, (grade) => grade.task)

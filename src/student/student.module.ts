@@ -8,10 +8,11 @@ import { Task } from './entities/task.entity';
 import { StudentRepository } from './repository/student.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { Grade } from './entities/grade.entity';
+import { Feedback } from './entities/feedback.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Student, Signature, Task, Grade]),
+    TypeOrmModule.forFeature([Student, Signature, Task, Grade, Feedback]),
     JwtModule.register({
       secret: 'mi_jwt_key',
       global: true,

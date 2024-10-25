@@ -5,6 +5,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Feedback } from './feedback.entity';
 import { Grade } from './grade.entity';
 import { IsNotEmpty, Length, IsOptional } from 'class-validator';
 import { Signature } from './signature.entity';
@@ -52,6 +53,9 @@ export class Student {
 
   @OneToMany(() => Grade, (grade) => grade.student)
   grades: Grade[];
+
+  @OneToMany(() => Feedback, (feedback) => feedback.student)
+  feedbacks: Feedback[];
 
   @ManyToMany(() => Signature, (signature) => signature.students)
   signatures: Signature[];
