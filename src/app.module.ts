@@ -7,7 +7,7 @@ import { Landing } from './simple.controlle';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env',
+      envFilePath: ['.env', '.env.developmen.local'],
       isGlobal: true,
     }),
     ConfigDatabase,
