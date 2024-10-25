@@ -44,7 +44,7 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
 
     return {
       type: 'postgres',
-      url: this.configService.get<any>('POSTGRES_URL_NO_SSL'),
+      url: this.configService.get<any>('POSTGRES_URL'),
       entities: [Student, Signature, Task, Grade, Feedback],
       synchronize: true,
     };
