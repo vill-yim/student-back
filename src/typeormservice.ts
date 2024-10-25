@@ -31,6 +31,16 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
 
     const dbUrl = 
 
+
+   
+     return {
+      type: 'postgres',
+      url: this.configService.get<any>('DATABASE_URL'),
+      entities: [Student, Signature, Task, Grade, Feedback],
+      synchronize: true,
+    };
+     */
+
     return {
       type: 'postgres',
       name: this.configService.get<string>('DB_NAME'),
@@ -40,17 +50,6 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
       password: this.configService.get<string>('DB_PASSWORD'),
       database: this.configService.get<string>('DB_SELETED'),
       entities: [Student, Signature, Task, Grade, Feedback],
-      synchronize: true,
-    };
-
-   
-    
-     */
-
-    return {
-      type: 'postgres',
-      url: this.configService.get<string>('DATABASE_URL'),
-      entities: [Student, Signature, Task, Grade],
       synchronize: true,
     };
   }
