@@ -29,25 +29,22 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
       };
     }
 
-    const dbUrl = 
-
- return {
+    return {
       type: 'postgres',
-      name: this.configService.get<string>('DB_NAME'),
-      host: this.configService.get<any>('DB_HOST'),
-      port: this.configService.get<number>('DB_PORT'),
-      username: this.configService.get<string>('DB_USERNAME'),
-      password: this.configService.get<string>('DB_PASSWORD'),
-      database: this.configService.get<string>('DB_SELETED'),
+      name: this.configService.get<string>('HACKA_DATABASE_URL'),
+      host: this.configService.get<any>('POSTGRES_HOST'),
+      port: this.configService.get<number>('POSTGRES_DATABASE'),
+      username: this.configService.get<string>('POSTGRES_USER'),
+      password: this.configService.get<string>('POSTGRES_PASSWORD'),
+      database: this.configService.get<string>('POSTGRES_DATABASE'),
       entities: [Student, Signature, Task, Grade, Feedback],
       synchronize: true,
     };
-   
- 
-     */
+    */
+
     return {
       type: 'postgres',
-      url: this.configService.get<any>('POSTGRES_URL'),
+      url: this.configService.get<any>('POSTGRES_URL_NO_SSL'),
       entities: [Student, Signature, Task, Grade, Feedback],
       synchronize: true,
     };
