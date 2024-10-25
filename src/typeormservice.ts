@@ -47,7 +47,7 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
      */
     return {
       type: 'postgres',
-      url: this.configService.get<any>('DATABASE_URL'),
+      url: this.configService.get<any>('HACKA_DATABASE_URL'), // Cambia aquí
       entities: [Student, Signature, Task, Grade, Feedback],
       synchronize: true,
     };
