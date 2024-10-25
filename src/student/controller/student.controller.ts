@@ -64,7 +64,7 @@ export class StudentController {
     return await this.studentService.allDataStudent(id.toString());
   }
 
-  @Get('students')
+  @Get()
   async studentsAll() {
     return await this.studentService.studentsAll();
   }
